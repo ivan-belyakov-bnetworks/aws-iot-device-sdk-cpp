@@ -39,6 +39,7 @@ namespace awsiotsdk {
         static uint16_t endpoint_greengrass_discovery_port_;
 
         static util::String endpoint_;
+        static util::String endpoint_sni_;
         static util::String root_ca_path_;
         static util::String client_cert_path_;
         static util::String client_key_path_;

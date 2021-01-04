@@ -487,6 +487,14 @@ namespace awsiotsdk {
                 }
             }
 
+
+            if (!endpoint_sni_.empty()) {
+                if (1 != SSL_set_tlsext_host_name(p_ssl_handle_, endpoint_sni_.c_str())) {
+                    AWS_LOG_ERROR(OPENSSL_WRAPPER_LOG_TAG, " SSL INIT Failed - Unable to set SNI options");
+                    return ResponseCode::NETWORK_SSL_INIT_ERROR;
+                }
+            }
+
             networkResponse = PerformSSLConnect();
             if (ResponseCode::SUCCESS != networkResponse && address_family_ == AF_INET6) {
                 // IPv6 connection unsucessful retry with IPv4

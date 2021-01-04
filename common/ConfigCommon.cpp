@@ -37,6 +37,7 @@
 // Macro definitions for Json parser
 // Network settings
 #define SDK_CONFIG_ENDPOINT_KEY "endpoint"
+#define SDK_CONFIG_ENDPOINT_SNI_KEY "endpoint_sni"
 #define SDK_CONFIG_ENDPOINT_MQTT_PORT_KEY "mqtt_port"
 #define SDK_CONFIG_ENDPOINT_HTTPS_PORT_KEY "https_port"
 #define SDK_CONFIG_ENDPOINT_GREENGRASS_DISCOVERY_PORT_KEY "greengrass_discovery_port"
@@ -80,6 +81,7 @@ namespace awsiotsdk {
     uint16_t ConfigCommon::endpoint_greengrass_discovery_port_;
 
     util::String ConfigCommon::endpoint_;
+    util::String ConfigCommon::endpoint_sni_;
     util::String ConfigCommon::root_ca_path_;
     util::String ConfigCommon::client_cert_path_;
     util::String ConfigCommon::client_key_path_;
@@ -146,6 +148,12 @@ namespace awsiotsdk {
         rc = util::JsonParser::GetStringValue(sdk_config_json_, SDK_CONFIG_ENDPOINT_KEY, endpoint_);
         if (ResponseCode::SUCCESS != rc) {
             LogParseError(rc, sdk_config_json_, SDK_CONFIG_ENDPOINT_KEY);
+            return rc;
+        }
+
+        rc = util::JsonParser::GetStringValue(sdk_config_json_, SDK_CONFIG_ENDPOINT_SNI_KEY, endpoint_sni_);
+        if (ResponseCode::SUCCESS != rc) {
+            LogParseError(rc, sdk_config_json_, SDK_CONFIG_ENDPOINT_SNI_KEY);
             return rc;
         }
 

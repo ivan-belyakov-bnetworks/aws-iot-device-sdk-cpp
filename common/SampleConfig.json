@@ -1,5 +1,6 @@
 {
   "endpoint": "",
+  "endpoint_sni": "",
   "mqtt_port": 8883,
   "https_port": 443,
   "greengrass_discovery_port": 8443,

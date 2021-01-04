@@ -97,6 +97,7 @@ namespace awsiotsdk {
             // Endpoint information
             uint16_t endpoint_port_;                    ///< Endpoint port
             util::String endpoint_;                     ///< Endpoint for this connection
+            util::String endpoint_sni_;                 ///< SNI Endpoint for this connection
 
             SSL_CTX *p_ssl_context_;                    ///< SSL Context instance
             SSL *p_ssl_handle_;                         ///< SSL Handle
@@ -269,6 +270,17 @@ namespace awsiotsdk {
             void SetEndpointAndPort(util::String endpoint, uint16_t endpoint_port) {
                 endpoint_ = endpoint;
                 endpoint_port_ = endpoint_port;
+            }
+
+            /**
+             * @brief sets the endpoint and the port
+             *
+             * Called to change the endpoint and the port after the constructor has initialized the OpenSSL object.
+             * @param endpoint
+             * @param endpoint_port
+             */
+            void SetEndpointSNI(util::String endpoint) {
+                endpoint_sni_ = endpoint;
             }
 
             /**
